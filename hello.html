@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Document</title> 
+    </head> 
+    <body> 
+        <div style="margin: auto;width: 500px;"> 
+            <input type="file" id="file" accept=".txt"> 
+            <input type="button" name="11111" id="butStart" value="开始选择小可爱" onclick="startTimer()"> 
+            <input type="button" name="11111" id="butStop" value="就是你了" onclick="stopTimer()"> 
+        </div> 
+        <div> 
+            <p style="width: 500px; height: 60px;margin: auto; color: red;font-size: 28px;border: solid 1px sienna;" id="p1"></p > 
+        </div> 
+        <script> 
+            var datas = []; 
+            var str = []; 
+            document.getElementById("file").onchange = function() { 
+                var file = this.files[0]; 
+                var reader = new FileReader(); 
+                reader.onload = function() { 
+                    datas = reader.result.split("\r"); 
+                    str = datas; 
+                    };
+                reader.readAsText(file, "gb2312"); 
+                
+            }; 
+            function print() { 
+                var min = 0; 
+                var max = str.length; 
+                var n = random(min, max); 
+                document.getElementById("p1").innerHTML = str[n]; 
+            } 
+                var myArray; 
+            function startTimer() { 
+                if (str.length != 0) { 
+                    myArray = setInterval(print, 10); 
+                    } else { 
+                        alert("请选择文件"); 
+                    } 
+                } 
+            function stopTimer() { 
+                clearInterval(myArray); 
+            } 
+            function random(min, max) { 
+                return Math.floor(Math.random() * (max - min)) + min; 
+            } 
+        </script> 
+    </body> 
+</html>
